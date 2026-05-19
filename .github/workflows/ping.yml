@@ -1,0 +1,22 @@
+name: Keep Appwrite Alive
+
+on:
+  schedule:
+    # Roda a cada 3 dias ao meio-dia (UTC)
+    - cron: '0 12 */3 * *'
+  workflow_dispatch: # Cria um botão no GitHub para você rodar manualmente se quiser testar
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Preparar o Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Executar o Ping
+        run: node ping.js
